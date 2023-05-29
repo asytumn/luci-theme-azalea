@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ "$PKG_UPGRADE" != 1 ]; then
+	uci get luci.themes.Azalea >/dev/null 2>&1 || \
+	uci batch <<-EOF
+		set luci.themes.Azalea=/luci-static/azalea
+		set luci.main.mediaurlbase=/luci-static/azalea
+		commit luci
+	EOF
+fi
+
+exit 0

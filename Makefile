@@ -11,6 +11,16 @@ LUCI_DEPENDS:=+curl +jsonfilter
 PKG_VERSION:=1.0.1
 PKG_RELEASE:=20230528
 
+define Package/luci-theme-azalea/postrm
+#!/bin/sh
+[ -n "$${IPKG_INSTROOT}" ] || {
+	uci -q delete luci.themes.Azalea
+	uci commit luci
+}
+endef
+
 include $(TOPDIR)/feeds/luci/luci.mk
 
 # call BuildPackage - OpenWrt buildroot signature
+
+
